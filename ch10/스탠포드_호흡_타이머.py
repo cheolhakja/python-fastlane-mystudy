@@ -28,11 +28,11 @@ class Timer:
 block 함수, 코루틴이 아닌 함수를 비동기로 실행시키고 싶을때
 '''
 
-def blocked_func(mytime = 5.0):
+def blocked_func(thread_num, mytime = 5.0):
     start_time = time.time()
     while(True):
         if time.time() - start_time > mytime:
-            print("end")
+            print(thread_num, "번 쓰레드 종료")
             break
 
 async def end_when_time_elapsed(mytime = 5.0):
@@ -47,7 +47,7 @@ async def main():
     await asyncio.gather(*tasks)'''
 
     loop = asyncio.get_running_loop()
-    tasks = [loop.run_in_executor(None, blocked_func, time) for time in [10.0, 20.0]]
+    tasks = [loop.run_in_executor(None, blocked_func, num+1, time) for num, time in enumerate([10.0, 20.0])]
     await asyncio.gather(*tasks)
 
 
