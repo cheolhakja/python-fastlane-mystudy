@@ -34,11 +34,4 @@ async def main():
 
 if __name__ == "__main__":
     with Timer() as timer:
-        while(True):
-            if timer.check() == "end":
-                
-                break
-            else:
-                
-                continue
-        
+        asyncio.run(end_when_time_elapsed(10.0))
