@@ -27,11 +27,12 @@ class Timer:
 
 async def end_when_time_elapsed(mytime = 5.0):
     await asyncio.sleep(mytime)
+    
 
 async def main():
     #tasks = asyncio.create_task(end_when_time_elapsed())
 
-    tasks = [asyncio.create_task(end_when_time_elapsed(mytime)) for mytime in range(10, 16)]
+    tasks = [asyncio.create_task(end_when_time_elapsed(mytime)) for mytime in [10.0, 60.0]]
     await asyncio.gather(*tasks)
 
 
