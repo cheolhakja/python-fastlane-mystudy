@@ -24,15 +24,30 @@ class Timer:
 
         print("Elapsed time = ", time.time() - self.start_time)
 
+'''
+block 함수, 코루틴이 아닌 함수를 비동기로 실행시키고 싶을때
+'''
+
+def blocked_func(mytime = 5.0):
+    start_time = time.time()
+    while(True):
+        if time.time() - start_time > mytime:
+            print("end")
+            break
 
 async def end_when_time_elapsed(mytime = 5.0):
     await asyncio.sleep(mytime)
-    
+
+
 
 async def main():
     #tasks = asyncio.create_task(end_when_time_elapsed())
 
-    tasks = [asyncio.create_task(end_when_time_elapsed(mytime)) for mytime in [10.0, 60.0]]
+    '''tasks = [asyncio.create_task(end_when_time_elapsed(mytime)) for mytime in [10.0, 150.0]]
+    await asyncio.gather(*tasks)'''
+
+    loop = asyncio.get_running_loop()
+    tasks = [loop.run_in_executor(None, blocked_func, time) for time in [10.0, 20.0]]
     await asyncio.gather(*tasks)
 
 
