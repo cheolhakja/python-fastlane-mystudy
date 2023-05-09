@@ -29,9 +29,12 @@ async def end_when_time_elapsed(mytime = 5.0):
     await asyncio.sleep(mytime)
 
 async def main():
-    pass
+    #tasks = asyncio.create_task(end_when_time_elapsed())
+
+    tasks = [asyncio.create_task(end_when_time_elapsed(mytime)) for mytime in range(10, 16)]
+    await asyncio.gather(*tasks)
 
 
 if __name__ == "__main__":
     with Timer() as timer:
-        asyncio.run(end_when_time_elapsed(10.0))
+        asyncio.run(main())
