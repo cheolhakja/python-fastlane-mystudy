@@ -23,7 +23,7 @@ def find_person():
     pass
 
 
-def update_person():
+def update_person(n, p, e):
     """사람 추가 또는 수정
     사용자로부터 이름, 전화번호, 이메일을 입력받아서
     이미 있는 이름이면 업데이트를 하고
@@ -32,15 +32,14 @@ def update_person():
     list_row = ["황동혁", "010-1111-1111", "hwang@naver.com"]
 
 
-    name = "황동혁"
-    phone_num = "010-1111-1111"
-    email = "hwang@naver.com"
-    criterion = df["Name"] == name
+    name = n
+    phone_num = p
+    email = e
 
 
 
     if(name in df['Name'].values):
-        df.loc[name] = [name, phone_num, email]
+        df.loc[df["Name"] == name] = [name, phone_num, email]
     else:
         df.loc[len(df)] = [name, phone_num, email]
 
@@ -50,16 +49,15 @@ def delete_person():
 
     pass
 
+def test_update_person():
+    update_person("황동혁", "01011112222", "a@gmail.com")
+    update_person("황동혁", "01044449999", "itsnew@gmail.com")
+    print(df)
 
 
 #데이터프레임을 초기화할 때 비어있는 기둥들을 추가할 수도 있습니다.
 if __name__ == "__main__":
-
-    
-
-    df["Name"] = []
-    df["phone"] = []
-    df["email"] = []
+    test_update_person()
 
     #추가를 어떻게하지?
 
