@@ -43,6 +43,12 @@ def update_person(n, p, e):
     else:
         df.loc[len(df)] = [name, phone_num, email]
 
+    '''
+    판다스 공식 문서
+    Setting values
+    Set value for all items matching the list of labels
+    '''
+
 
 def delete_person():
     """이름을 입력받아서 데이터 삭제"""
